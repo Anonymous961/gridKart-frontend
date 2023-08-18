@@ -5,11 +5,18 @@ const Navbar = () => {
   return (
     <div className="flex justify-between items-center px-10 p-5 bg-gray-400">
       <div onClick={() => navigate("/")}>
-        <h1 className="text-4xl text-white">Navbar</h1>
+        <h1 className="text-4xl text-white">GridKart</h1>
       </div>
-      <nav className="flex justify-evenly w-80">
+      <nav className="flex justify-evenly items-center w-80">
         <Link to="/signup">Sign Up</Link>
         <Link to="/login">login</Link>
+        <Link to="/profile">
+          <img
+            src="https://i.postimg.cc/Sx363vKC/userimage.webp"
+            className="w-20 rounded-md"
+            alt=""
+          />
+        </Link>
       </nav>
     </div>
   );
