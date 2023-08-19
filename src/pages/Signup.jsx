@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { doc, setDoc } from "firebase/firestore";
 import { db, auth } from "../services/firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 export default function Signup() {
   const [name, setName] = useState("");
@@ -49,6 +49,9 @@ export default function Signup() {
         email: email,
         type: type,
         walletAddress: walletAddress,
+      });
+      await updateProfile(user, {
+        displayName: type,
       });
       console.log("Signed Up!");
     } catch (error) {
