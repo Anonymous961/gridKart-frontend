@@ -15,6 +15,7 @@ import Success from "./pages/SuccessRedeem";
 import SuccessBuy from "./pages/SuccessBuy";
 import SuccessRecived from "./pages/SuccessRecieved";
 import BuyPage from "./pages/BuyPage";
+import History from "./pages/History";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -44,6 +45,7 @@ function App() {
         <Route exact path="/buy/success" element={<SuccessBuy />} />
         <Route exact path="/product/success" element={<SuccessRecived />} />
         {user && <Route path="/addProducts" element={<AddProduct />} />}
+        <Route exact path="/history" element={<History />} />
       </Routes>
       <Footer />
     </Router>

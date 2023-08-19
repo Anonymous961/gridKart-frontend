@@ -57,6 +57,16 @@ const Navbar = () => {
             )}
           </>
         )}
+        <Link to="/signup">Sign Up</Link>
+        <Link to="/login">login</Link>
+        <Link to="/history">history</Link>
+        <Link to="/profile">
+          <img
+            src="https://i.postimg.cc/Sx363vKC/userimage.webp"
+            className="w-20 rounded-md"
+            alt=""
+          />
+        </Link>
       </nav>
     </div>
   );
