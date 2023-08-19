@@ -8,10 +8,9 @@ export default function Profile() {
             className="w-80 rounded-xl mb-10 float-right"
             alt=""
           />
-          <p className="text-2xl m-2 ">Name:XYZ</p>
-          <p className="text-2xl m-2 ">Email:XYZ</p>
-          <p className="text-2xl m-2 ">Coins:XYZ</p>
-          <p className="text-2xl m-2 ">WalletHash:XYZ</p>
+          <p>Name:XYZ</p>
+          <p>Name:XYZ</p>
+          <p>Name:XYZ</p>
         </div>
       </div>
     </div>
