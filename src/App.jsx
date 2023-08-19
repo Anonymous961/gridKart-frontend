@@ -11,8 +11,9 @@ import AddProduct from "./pages/AddEdit";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./services/firebase";
 import Redeem from "./pages/Redeem";
-import Success from "./pages/Success";
+import Success from "./pages/SuccessRedeem";
 import SuccessBuy from "./pages/SuccessBuy";
+import SuccessRecived from "./pages/SuccessRecieved";
 import BuyPage from "./pages/BuyPage";
 
 function App() {
@@ -38,9 +39,10 @@ function App() {
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/profile" element={<Profile />} />
         <Route exact path="/redeem" element={<Redeem />} />
-        <Route exact path="/buy" element={<BuyPage/>} />
+        <Route exact path="/buy" element={<BuyPage />} />
         <Route exact path="/redeem/success" element={<Success />} />
         <Route exact path="/buy/success" element={<SuccessBuy />} />
+        <Route exact path="/product/success" element={<SuccessRecived />} />
         {user && <Route path="/addProducts" element={<AddProduct />} />}
       </Routes>
       <Footer />

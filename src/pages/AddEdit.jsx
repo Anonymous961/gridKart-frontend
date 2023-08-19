@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { collection, addDoc } from "firebase/firestore";
-import { db } from "../services/firebase";
+import { collection, addDoc, doc, getDoc } from "firebase/firestore";
+import { db, auth } from "../services/firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
 export default function AddProduct() {
   const navigate = useNavigate();
@@ -9,10 +10,54 @@ export default function AddProduct() {
   const [productDescription, setProductDescription] = useState("");
   const [price, setPrice] = useState("");
   const [coins, setCoins] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [userData, setUserData] = useState(null);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const userID = user.uid;
+        const userRef = doc(db, "seller", userID);
+        getDoc(userRef)
+          .then((docSnapshot) => {
+            if (docSnapshot.exists()) {
+              setUserData(docSnapshot.data().walletAddress);
+            } else {
+              console.log("User not found.");
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching user data:", error);
+          });
+      } else {
+        console.log("Error: No user");
+      }
+    });
+    return () => unsubscribe();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     try {
+      const redeemResponse = await fetch(
+        `${import.meta.env.VITE_SERVER_URL}/redeemCoins`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            address: userData,
+            amount: coins,
+          }),
+        }
+      );
+
+      if (!redeemResponse.ok) {
+        throw new Error("Error redeeming gift coins");
+      }
+
       const productData = {
         name,
         productDescription,
@@ -26,9 +71,11 @@ export default function AddProduct() {
       );
       console.log("New product added with ID:", newProductRef.id);
 
-      navigate("/products");
+      navigate("/");
     } catch (error) {
       console.error("Error submitting product:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -67,7 +114,9 @@ export default function AddProduct() {
           required
         />
 
-        <button type="submit">Submit</button>
+        <button type="submit" disabled={loading}>
+          {loading ? "Adding..." : "Submit"}
+        </button>
       </form>
     </div>
   );
