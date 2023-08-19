@@ -10,6 +10,8 @@ import Profile from "./pages/Profile";
 import AddProduct from "./pages/AddEdit";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./services/firebase";
+import Redeem from "./pages/Redeem";
+import Success from "./pages/Success";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -33,6 +35,8 @@ function App() {
         <Route exact path="/signup" element={<Signup />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/profile" element={<Profile />} />
+        <Route exact path="/redeem" element={<Redeem />} />
+        <Route exact path="/redeem/success" element={<Success />} />
         {user && <Route path="/addProducts" element={<AddProduct />} />}
       </Routes>
       <Footer />
