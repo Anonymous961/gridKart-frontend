@@ -1,6 +1,8 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./services/firebase";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
@@ -8,8 +10,6 @@ import Login from "./pages/Login";
 import Footer from "./components/Footer";
 import Profile from "./pages/Profile";
 import AddProduct from "./pages/AddEdit";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./services/firebase";
 import Redeem from "./pages/Redeem";
 import Success from "./pages/SuccessRedeem";
 import SuccessBuy from "./pages/SuccessBuy";
