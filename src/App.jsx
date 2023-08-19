@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Footer from "./components/Footer";
 import Profile from "./pages/Profile";
 import History from "./pages/History";
+import Details from "./components/details";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/profile" element={<Profile />} />
         <Route exact path="/history" element={<History />} />
+        <Route exact path="/details/:id" element={<Details />} />
       </Routes>
       <Footer />
     </Router>
