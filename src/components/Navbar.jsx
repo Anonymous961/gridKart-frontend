@@ -9,8 +9,9 @@ const Navbar = () => {
       </div>
       <nav className="flex justify-evenly items-center w-80">
         <Link to="/signup">Sign Up</Link>
-        <Link to="/login">login</Link>
+        <Link to="/login">Login</Link>
         <Link to="/redeem">Redeem</Link>
+        <Link to="/buy">Buy</Link>
         <Link to="/profile">
           <img
             src="https://i.postimg.cc/Sx363vKC/userimage.webp"
