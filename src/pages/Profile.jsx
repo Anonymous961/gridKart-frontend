@@ -2,7 +2,10 @@ import { useState, useEffect } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db, auth } from "../services/firebase";
 import coin from "../assets/coin.png";
+import { useNavigate } from "react-router-dom";
+
 export default function Profile() {
+  const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
   const [balance, setBalance] = useState(null);
   const userId = auth.currentUser.uid;
@@ -47,6 +50,15 @@ export default function Profile() {
     }
   };
 
+  const handleSignOut = async () => {
+    try {
+      await auth.signOut();
+      navigate("/");
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
+
   if (!userData) {
     return <div>Loading...</div>;
   }
@@ -60,9 +72,15 @@ export default function Profile() {
         <p className="text-white">Type: {userData.type}</p>
         <p className="text-white">Wallet Address: {userData.walletAddress}</p>
         <p className="text-white">
-          <img src={coin} height="50px" width="50px" />
+          <img src={coin} height="50px" width="50px" alt="Coins" />
           GCT Balance: {balance}
         </p>
+        <button
+          className="bg-red-500 text-white mt-4 p-2 rounded"
+          onClick={handleSignOut}
+        >
+          Sign Out
+        </button>
       </div>
     </div>
   );

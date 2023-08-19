@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getDoc, doc,collection,getDocs } from "firebase/firestore";
+import { getDoc, doc, collection, getDocs } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { db, auth } from "../services/firebase";
 
 export default function Home() {
   const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
-  const [userBalance, setUserBalance] = useState(null);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
+      fetchProducts();
       if (user) {
         const userID = user.uid;
         const userRef = doc(db, "seller", userID);
@@ -19,8 +19,6 @@ export default function Home() {
           .then((docSnapshot) => {
             if (docSnapshot.exists()) {
               setUserData(docSnapshot.data().walletAddress);
-              fetchUserBalance(docSnapshot.data().walletAddress);
-              fetchProducts();
             } else {
               console.log("User not found.");
             }
@@ -44,29 +42,6 @@ export default function Home() {
       setProducts(productsData);
     } catch (error) {
       console.error("Error fetching products:", error);
-    }
-  };
-  const fetchUserBalance = async (userAddress) => {
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_SERVER_URL}/fetchBalance`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ address: userAddress }),
-        }
-      );
-
-      if (response.ok) {
-        const data = await response.json();
-        setUserBalance(data.balance);
-      } else {
-        console.error("Error fetching balance:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error fetching balance:", error);
     }
   };
 
@@ -96,10 +71,6 @@ export default function Home() {
     }
   };
 
-  if (userBalance === null) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="w-2/3">
@@ -120,14 +91,14 @@ export default function Home() {
               <p className="mb-2">Coins: {product.coins} coins</p>
               <button
                 className={`${
-                  product.coins > userBalance
-                    ? "bg-gray-300 cursor-not-allowed"
+                  !userData
+                    ? "bg-gray-500 cursor-not-allowed"
                     : "bg-green-400 hover:bg-green-500"
                 } text-white py-2 rounded-md`}
                 onClick={() => handleBuy(product)}
-                disabled={product.coins > userBalance}
+                disabled={userData === null}
               >
-                {product.coins > userBalance ? "Insufficient Funds" : "Buy"}
+                {userData ? "Buy" : "Login First"}
               </button>
             </div>
           ))}
