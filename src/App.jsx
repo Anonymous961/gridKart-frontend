@@ -9,6 +9,7 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Footer from "./components/Footer";
 import Profile from "./pages/Profile";
+import History from "./pages/History";
 import AddProduct from "./pages/AddEdit";
 import Redeem from "./pages/Redeem";
 import Success from "./pages/SuccessRedeem";
@@ -37,6 +38,7 @@ function App() {
         <Route exact path="/" element={<Home />} />
         <Route exact path="/signup" element={<Signup />} />
         <Route exact path="/login" element={<Login />} />
+        <Route exact path="/history" element={<History />} />
         <Route exact path="/profile" element={<Profile />} />
         <Route exact path="/redeem" element={<Redeem />} />
         <Route exact path="/buy" element={<BuyPage />} />
