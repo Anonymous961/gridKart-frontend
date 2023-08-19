@@ -9,7 +9,7 @@ const Navbar = () => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        user.displayName === "seller" ? setUser("seller") : setUser(null);
+        user.displayName === "seller" ? setUser("seller") : setUser("user");
       } else {
         setUser(null);
       }
@@ -29,20 +29,34 @@ const Navbar = () => {
             <Link to="/login">Login</Link>
           </>
         )}
-        {user === "seller" ? (
+        {user && (
           <>
-            <Link to="/buy">Buy Coins</Link>
+            {user === "seller" ? (
+              <>
+                <Link to="/buy">Buy Coins</Link>
+                <Link to="/addProducts">Add Products</Link>
+                <Link to="/profile">
+                  <img
+                    src="https://i.postimg.cc/Sx363vKC/userimage.webp"
+                    className="w-20 rounded-md"
+                    alt=""
+                  />
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link to="/redeem">Redeem Coins</Link>
+                <Link to="/profile">
+                  <img
+                    src="https://i.postimg.cc/Sx363vKC/userimage.webp"
+                    className="w-20 rounded-md"
+                    alt=""
+                  />
+                </Link>
+              </>
+            )}
           </>
-        ) : (
-          <Link to="/redeem">Redeem Coins</Link>
         )}
-        <Link to="/profile">
-          <img
-            src="https://i.postimg.cc/Sx363vKC/userimage.webp"
-            className="w-20 rounded-md"
-            alt=""
-          />
-        </Link>
       </nav>
     </div>
   );

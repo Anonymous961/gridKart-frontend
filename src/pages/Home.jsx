@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getDoc, doc, collection, getDocs } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { db, auth } from "../services/firebase";
+import coin from "../assets/coin.png";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ export default function Home() {
       fetchProducts();
       if (user) {
         const userID = user.uid;
-        const userRef = doc(db, "seller", userID);
+        const userRef = doc(db, user.displayName, userID);
         getDoc(userRef)
           .then((docSnapshot) => {
             if (docSnapshot.exists()) {
@@ -87,8 +88,11 @@ export default function Home() {
                 className="h-32 object-cover mb-2"
               />
               <h2 className="text-lg font-semibold mb-2">{product.name}</h2>
-              <p className="mb-2">Price: ${product.price}</p>
-              <p className="mb-2">Coins: {product.coins} coins</p>
+              <p className="mb-2">Price: ₹{product.price}</p>
+              <p className="mb-2">
+                Coins: {product.coins} coins
+                <img src={coin} height={50} width={50} />
+              </p>
               <button
                 className={`${
                   !userData

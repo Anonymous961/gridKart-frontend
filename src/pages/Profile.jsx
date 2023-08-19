@@ -3,28 +3,36 @@ import { doc, getDoc } from "firebase/firestore";
 import { db, auth } from "../services/firebase";
 import coin from "../assets/coin.png";
 import { useNavigate } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
 
 export default function Profile() {
   const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
   const [balance, setBalance] = useState(null);
-  const userId = auth.currentUser.uid;
 
   useEffect(() => {
-    const userRef = doc(db, "seller", userId);
-    getDoc(userRef)
-      .then((docSnapshot) => {
-        if (docSnapshot.exists()) {
-          setUserData(docSnapshot.data());
-          fetchBalance(docSnapshot.data().walletAddress);
-        } else {
-          console.log("User not found.");
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching user data:", error);
-      });
-  }, [userId]);
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const userID = user.uid;
+        const userRef = doc(db, user.displayName, userID);
+        getDoc(userRef)
+          .then((docSnapshot) => {
+            if (docSnapshot.exists()) {
+              setUserData(docSnapshot.data());
+              fetchBalance(docSnapshot.data().walletAddress);
+            } else {
+              console.log("User not found.");
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching user data:", error);
+          });
+      } else {
+        console.log("Error: No user");
+      }
+    });
+    return () => unsubscribe();
+  }, []);
 
   const fetchBalance = async (walletAddress) => {
     try {

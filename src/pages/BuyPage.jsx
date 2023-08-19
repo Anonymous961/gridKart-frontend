@@ -19,7 +19,7 @@ export default function BuyPage() {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         const userID = user.uid;
-        const userRef = doc(db, "seller", userID);
+        const userRef = doc(db, user.displayName, userID);
         getDoc(userRef)
           .then((docSnapshot) => {
             if (docSnapshot.exists()) {
@@ -104,7 +104,7 @@ export default function BuyPage() {
               className="bg-white rounded-lg p-4 shadow-md flex flex-col justify-between"
             >
               <h2 className="text-lg font-semibold mb-2">{item.name}</h2>
-              <p className="mb-2">Price: ${item.price}</p>
+              <p className="mb-2">Price: ₹{item.price}</p>
               <button
                 className={`${"bg-green-400 hover:bg-green-500"} text-white py-2 rounded-md`}
                 onClick={() => handleBuy(item)}

@@ -12,6 +12,7 @@ export default function AddProduct() {
   const [coins, setCoins] = useState("");
   const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState(null);
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -32,6 +33,7 @@ export default function AddProduct() {
         console.log("Error: No user");
       }
     });
+
     return () => unsubscribe();
   }, []);
 
@@ -80,41 +82,59 @@ export default function AddProduct() {
   };
 
   return (
-    <div>
-      <h2>Add Product</h2>
-      <form onSubmit={handleSubmit}>
-        <label>Name</label>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
+    <div className="container mx-auto p-8">
+      <h2 className="text-2xl font-bold mb-4">Add Product</h2>
+      <form onSubmit={handleSubmit} className="max-w-md">
+        <div className="mb-4">
+          <label className="block font-semibold mb-1">Name</label>
+          <input
+            type="text"
+            className="w-full p-2 border rounded"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </div>
 
-        <label>Product Description</label>
-        <textarea
-          value={productDescription}
-          onChange={(e) => setProductDescription(e.target.value)}
-          required
-        />
+        <div className="mb-4">
+          <label className="block font-semibold mb-1">
+            Product Description
+          </label>
+          <textarea
+            className="w-full p-2 border rounded"
+            value={productDescription}
+            onChange={(e) => setProductDescription(e.target.value)}
+            required
+          />
+        </div>
 
-        <label>Price</label>
-        <input
-          type="number"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-          required
-        />
+        <div className="mb-4">
+          <label className="block font-semibold mb-1">Price</label>
+          <input
+            type="number"
+            className="w-full p-2 border rounded"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            required
+          />
+        </div>
 
-        <label>Gift Coins</label>
-        <input
-          type="number"
-          value={coins}
-          onChange={(e) => setCoins(e.target.value)}
-          required
-        />
+        <div className="mb-4">
+          <label className="block font-semibold mb-1">Gift Coins</label>
+          <input
+            type="number"
+            className="w-full p-2 border rounded"
+            value={coins}
+            onChange={(e) => setCoins(e.target.value)}
+            required
+          />
+        </div>
 
-        <button type="submit" disabled={loading}>
+        <button
+          type="submit"
+          className="bg-green-500 text-white py-2 px-4 rounded disabled:opacity-50"
+          disabled={loading}
+        >
           {loading ? "Adding..." : "Submit"}
         </button>
       </form>

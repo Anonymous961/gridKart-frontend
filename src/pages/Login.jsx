@@ -15,7 +15,7 @@ export default function Login() {
       signInWithEmailAndPassword(auth, email, password);
       navigate("/profile");
     } catch (error) {
-      console.log(error)
+      console.log(error);
       setError("Invalid email or password");
     }
   };

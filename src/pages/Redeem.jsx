@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { auth, db } from "../services/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
+import coin from "../assets/coin.png";
 
 const sampleItems = [
   { id: 1, name: "Sample Coupon 1", price: 5 },
@@ -19,7 +20,7 @@ export default function Redeem() {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         const userID = user.uid;
-        const userRef = doc(db, "seller", userID);
+        const userRef = doc(db, user.displayName, userID);
         getDoc(userRef)
           .then((docSnapshot) => {
             if (docSnapshot.exists()) {
@@ -104,7 +105,10 @@ export default function Redeem() {
               className="bg-white rounded-lg p-4 shadow-md flex flex-col justify-between"
             >
               <h2 className="text-lg font-semibold mb-2">{item.name}</h2>
-              <p className="mb-2">Price: {item.price} coins</p>
+              <p className="mb-2">
+                Price: {item.price} coins
+                <img src={coin} />
+              </p>
               <button
                 className={`${
                   item.price > userBalance
