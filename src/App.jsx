@@ -22,7 +22,7 @@ function App() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        user.displayName === "seller" ? setUser("allowed") : setUser(null);
+        user.displayName === "seller" ? setUser("user") : setUser(null);
       } else {
         setUser(null);
       }
