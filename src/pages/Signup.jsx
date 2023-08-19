@@ -30,9 +30,9 @@ export default function Signup() {
           <input type="submit" className="m-3 bg-green-400 p-3 rounded-md" />
         </form>
         <p>
-          already an user?
+          Already an user? 
           <Link to="/login" className="text-purple-500 underline">
-            login
+            Login
           </Link>
         </p>
       </div>
