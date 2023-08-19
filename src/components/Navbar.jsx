@@ -10,6 +10,7 @@ const Navbar = () => {
       <nav className="flex justify-evenly items-center w-80">
         <Link to="/signup">Sign Up</Link>
         <Link to="/login">login</Link>
+        <Link to="/history">history</Link>
         <Link to="/profile">
           <img
             src="https://i.postimg.cc/Sx363vKC/userimage.webp"
