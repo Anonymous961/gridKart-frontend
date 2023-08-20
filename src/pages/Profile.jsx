@@ -72,19 +72,42 @@ export default function Profile() {
   }
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <div className="border-2 bg-lime-400 rounded-md flex flex-col justify-center items-center p-8 px-20 w-1/3">
-        <h1 className="mt-10 text-4xl text-white">Profile</h1>
-        <p className="text-white">Name: {userData.name}</p>
-        <p className="text-white">Email: {userData.email}</p>
-        <p className="text-white">Type: {userData.type}</p>
-        <p className="text-white">Wallet Address: {userData.walletAddress}</p>
-        <p className="text-white">
-          <img src={coin} height="50px" width="50px" alt="Coins" />
-          GCT Balance: {balance}
-        </p>
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <div className="border-2 bg-slate-600 shadow-md items-center rounded-md p-8 w-1/3">
+        <h1 className="mb-6 text-3xl underline text-center font-semibold text-gray-50">
+          Profile
+        </h1>
+        <div className="space-y-4">
+          <div className="flex items-center text-gray-50">
+            <p className="font-bold w-1/3">Name:</p>
+            <p className="w-2/3">{userData.name}</p>
+          </div>
+          <div className="flex items-center text-gray-50">
+            <p className="font-bold w-1/3">Email:</p>
+            <p className="w-2/3">{userData.email}</p>
+          </div>
+          <div className="flex items-center text-gray-50">
+            <p className="font-bold w-1/3">Type:</p>
+            <p className="w-2/3">{userData.type}</p>
+          </div>
+          <div className="flex items-center text-gray-50">
+            <p className="font-bold w-1/3">Wallet Address:</p>
+            <p className="w-2/3 overflow-ellipsis">
+              {userData.walletAddress.slice(0, 10) +
+                "......" +
+                userData.walletAddress.slice(-8)}
+            </p>
+          </div>
+          <div className="flex items-center text-gray-50">
+            <p className="font-bold w-1/3">GCT Balance:</p>
+            <div className="flex items-center">
+              <img src={coin} alt="Coins" className="h-8 w-8 mr-2" />
+              <p>{balance}</p>
+            </div>
+          </div>
+        </div>
         <button
-          className="bg-red-500 text-white mt-4 p-2 rounded"
+          className="bg-red-500 text-white mt-6 px-4 py-2 rounded hover:bg-red-600"
           onClick={handleSignOut}
         >
           Sign Out

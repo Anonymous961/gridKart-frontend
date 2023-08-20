@@ -73,34 +73,39 @@ export default function Home() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="w-2/3">
-        <h1 className="text-4xl font-bold mb-8">Products</h1>
-        <div className="grid grid-cols-3 gap-4">
+        <h1 className="text-3xl font-semibold mb-8 text-gray-800">Products</h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {products.map((product) => (
             <div
               key={product.id}
-              className="bg-white rounded-lg p-4 shadow-md flex flex-col justify-between"
+              className="bg-slate-600 rounded-lg p-6 shadow-md flex flex-col justify-between"
             >
               <img
                 src="https://picsum.photos/200"
                 alt={product.name}
-                className="h-32 object-cover mb-2"
+                className="h-32 object-cover mb-4"
               />
-              <h2 className="text-lg font-semibold mb-2">{product.name}</h2>
-              <p className="mb-2">Price: ₹{product.price}</p>
-              <p className="mb-2">
-                Coins: {product.coins} coins
-                <img src={coin} height={50} width={50} />
+              <h2 className="text-xl font-semibold text-gray-50 mb-2">{product.name}</h2>
+              <p className="text-gray-50 mb-2">Price: ₹{product.price}</p>
+              <p className="text-gray-50 mb-2">
+                Coins:
+                <img
+                  src={coin}
+                  alt="Coins"
+                  className="h-8 w-8 ml-2 inline-block"
+                />
+                {product.coins} coins
               </p>
               <button
                 className={`${
                   !userData
                     ? "bg-gray-500 cursor-not-allowed"
-                    : "bg-green-400 hover:bg-green-500"
+                    : "bg-green-500 hover:bg-green-600"
                 } text-white py-2 rounded-md`}
                 onClick={() => handleBuy(product)}
-                disabled={userData === null}
+                disabled={!userData}
               >
                 {userData ? "Buy" : "Login First"}
               </button>

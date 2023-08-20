@@ -95,30 +95,37 @@ export default function Redeem() {
   }
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="w-2/3">
-        <h1 className="text-4xl font-bold mb-8">Redeem Items</h1>
-        <div className="grid grid-cols-3 gap-4">
+        <h1 className="text-3xl font-semibold mb-8 text-gray-800">
+          Redeem GCT Coins
+        </h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {sampleItems.map((item) => (
             <div
               key={item.id}
-              className="bg-white rounded-lg p-4 shadow-md flex flex-col justify-between"
+              className="bg-slate-600 rounded-lg p-6 shadow-md flex flex-col justify-between"
             >
-              <h2 className="text-lg font-semibold mb-2">{item.name}</h2>
-              <p className="mb-2">
-                Price: {item.price} coins
-                <img src={coin} />
+              <h2 className="text-xl text-gray-50 font-semibold mb-2">{item.name}</h2>
+              <p className="text-gray-50 mb-2">
+                Price: 
+                <img
+                  src={coin}
+                  alt="Coins"
+                  className="inline-block h-8 w-8 ml-2"
+                />
+                {item.price} coins
               </p>
               <button
                 className={`${
                   item.price > userBalance
                     ? "bg-gray-300 cursor-not-allowed"
-                    : "bg-green-400 hover:bg-green-500"
+                    : "bg-green-500 hover:bg-green-600"
                 } text-white py-2 rounded-md`}
                 onClick={() => handleRedeem(item)}
                 disabled={item.price > userBalance}
               >
-                {item.price > userBalance ? "Insufficient Coins" : "Buy"}
+                {item.price > userBalance ? "Insufficient Coins" : "Redeem"}
               </button>
             </div>
           ))}

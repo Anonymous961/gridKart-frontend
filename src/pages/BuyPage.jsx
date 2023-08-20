@@ -3,11 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { db, auth } from "../services/firebase";
 import { doc, getDoc } from "firebase/firestore";
+import coin from "../assets/coin.png";
 
 const sampleItems = [
-  { id: 1, name: "50 Tokens", price: 5000 },
-  { id: 2, name: "10 Tokens", price: 1000 },
-  { id: 3, name: "1 Token", price: 100 },
+  { id: 1, name: "50 Coins", price: 5000 },
+  { id: 2, name: "10 Coins", price: 1000 },
+  { id: 3, name: "1 Coins", price: 100 },
 ];
 
 export default function BuyPage() {
@@ -94,22 +95,25 @@ export default function BuyPage() {
   }
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="w-2/3">
-        <h1 className="text-4xl font-bold mb-8">Buy Items</h1>
-        <div className="grid grid-cols-3 gap-4">
+        <h1 className="text-3xl font-semibold mb-8 text-gray-800">Buy Coins</h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {sampleItems.map((item) => (
             <div
               key={item.id}
-              className="bg-white rounded-lg p-4 shadow-md flex flex-col justify-between"
+              className="bg-slate-600 rounded-lg p-6 shadow-md flex flex-col justify-between"
             >
-              <h2 className="text-lg font-semibold mb-2">{item.name}</h2>
-              <p className="mb-2">Price: ₹{item.price}</p>
+              <h2 className="text-xl text-gray-50 flex items-center font-semibold mb-2">
+                <img src={coin} className="h-9 w-9 mr-2" />
+                {item.name}
+              </h2>
+              <p className="text-gray-50 mb-2">Price: ₹{item.price}</p>
               <button
-                className={`${"bg-green-400 hover:bg-green-500"} text-white py-2 rounded-md`}
+                className="bg-green-500 hover:bg-green-600 text-white py-2 rounded-md"
                 onClick={() => handleBuy(item)}
               >
-                {"Buy"}
+                Buy
               </button>
             </div>
           ))}

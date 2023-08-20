@@ -82,62 +82,77 @@ export default function AddProduct() {
   };
 
   return (
-    <div className="container mx-auto p-8">
-      <h2 className="text-2xl font-bold mb-4">Add Product</h2>
-      <form onSubmit={handleSubmit} className="max-w-md">
-        <div className="mb-4">
-          <label className="block font-semibold mb-1">Name</label>
-          <input
-            type="text"
-            className="w-full p-2 border rounded"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </div>
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <div className="border-2 bg-slate-600 shadow-md items-center rounded-md p-8 w-1/3">
+        <h2 className="text-3xl text-center font-semibold mb-6 text-gray-50">
+          Add Product
+        </h2>
+        <form onSubmit={handleSubmit} className="max-w-md">
+          <div className="mb-4">
+            <label className="block font-semibold mb-2 text-gray-50">
+              Name
+            </label>
+            <input
+              type="text"
+              className="w-full p-3 border rounded bg-white"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
 
-        <div className="mb-4">
-          <label className="block font-semibold mb-1">
-            Product Description
-          </label>
-          <textarea
-            className="w-full p-2 border rounded"
-            value={productDescription}
-            onChange={(e) => setProductDescription(e.target.value)}
-            required
-          />
-        </div>
+          <div className="mb-4">
+            <label className="block font-semibold mb-2 text-gray-50">
+              Product Description
+            </label>
+            <textarea
+              className="w-full p-3 border rounded bg-white"
+              value={productDescription}
+              onChange={(e) => setProductDescription(e.target.value)}
+              required
+            />
+          </div>
 
-        <div className="mb-4">
-          <label className="block font-semibold mb-1">Price</label>
-          <input
-            type="number"
-            className="w-full p-2 border rounded"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            required
-          />
-        </div>
+          <div className="mb-4">
+            <label className="block font-semibold mb-2 text-gray-50">
+              Price
+            </label>
+            <input
+              type="number"
+              className="w-full p-3 border rounded bg-white"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              required
+            />
+          </div>
 
-        <div className="mb-4">
-          <label className="block font-semibold mb-1">Gift Coins</label>
-          <input
-            type="number"
-            className="w-full p-2 border rounded"
-            value={coins}
-            onChange={(e) => setCoins(e.target.value)}
-            required
-          />
-        </div>
-
-        <button
-          type="submit"
-          className="bg-green-500 text-white py-2 px-4 rounded disabled:opacity-50"
-          disabled={loading}
-        >
-          {loading ? "Adding..." : "Submit"}
-        </button>
-      </form>
+          <div className="mb-4">
+            <label className="block font-semibold mb-2 text-gray-50">
+              Gift Coins
+            </label>
+            <input
+              type="number"
+              className="w-full p-3 border rounded bg-white"
+              value={coins}
+              onChange={(e) => setCoins(e.target.value)}
+              required
+            />
+          </div>
+          <div className="flex items-center">
+            <button
+              type="submit"
+              className={`${
+                loading
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-green-500 hover:bg-green-600"
+              } text-white py-3 px-4 rounded disabled:opacity-50 items-center`}
+              disabled={loading}
+            >
+              {loading ? "Adding..." : "Submit"}
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

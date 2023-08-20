@@ -21,15 +21,14 @@ export default function Login() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <div className="border-2 bg-lime-400 rounded-md flex flex-col justify-center items-center p-8 px-20 w-1/3">
-        <h1 className="mt-10 text-4xl text-white">Login</h1>
-        <form
-          className="flex flex-col justify-center items-center pt-10 min-w-full"
-          onSubmit={handleLogin}
-        >
+    <div className="flex justify-center items-center min-h-screen bg-white">
+      <div className="border-2 bg-slate-600 shadow-xl rounded-md p-8 w-1/3">
+        <h1 className="mb-6 text-3xl text-center font-semibold text-gray-50">
+          Login
+        </h1>
+        <form className="flex flex-col" onSubmit={handleLogin}>
           <input
-            className="p-2 rounded-md m-1 w-3/4"
+            className="p-3 rounded-md mb-4 bg-gray-100 focus:outline-none focus:ring focus:border-green-500"
             type="email"
             placeholder="Email"
             value={email}
@@ -37,24 +36,28 @@ export default function Login() {
             required
           />
           <input
-            className="p-2 rounded-md m-1 w-3/4"
+            className="p-3 rounded-md mb-4 bg-gray-100 focus:outline-none focus:ring focus:border-green-500"
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <input
+          <button
             type="submit"
-            className="m-3 bg-green-400 p-3 rounded-md"
-            value="Login"
-          />
+            className="bg-green-500 hover:bg-green-600 text-white py-2 rounded-md mb-4"
+          >
+            Login
+          </button>
         </form>
-        {error && <p className="text-red-500">{error}</p>}
-        <p>
+        {error && <p className="text-red-500 text-center">{error}</p>}
+        <p className="text-center text-gray-50">
           New user?{" "}
-          <Link to="/signup" className="text-purple-500 underline">
-            Signup
+          <Link
+            to="/signup"
+            className="text-gray-50 underline hover:text-emerald-600"
+          >
+            Sign up here
           </Link>
         </p>
       </div>
