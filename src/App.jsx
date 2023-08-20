@@ -23,7 +23,7 @@ function App() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        user.displayName === "seller" ? setUser("allowed") : setUser(null);
+        user.displayName === "seller" ? setUser("user") : setUser(null);
       } else {
         setUser(null);
       }
@@ -40,15 +40,16 @@ function App() {
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/profile" element={<Profile />} />
         <Route exact path="/redeem" element={<Redeem />} />
+        <Route exact path="/history" element={<History />} />
         <Route exact path="/buy" element={<BuyPage />} />
         <Route exact path="/redeem/success" element={<Success />} />
         <Route exact path="/buy/success" element={<SuccessBuy />} />
         <Route exact path="/product/success" element={<SuccessRecived />} />
         {user && <Route path="/addProducts" element={<AddProduct />} />}
-        <Route exact path="/history" element={<History />} />
       </Routes>
       <Footer />
     </Router>
   );
 }
+
 export default App;

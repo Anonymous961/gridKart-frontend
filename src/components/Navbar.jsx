@@ -29,6 +29,7 @@ const Navbar = () => {
             <Link to="/login">Login</Link>
           </>
         )}
+        <Link to="/history">Transaction History</Link>
         {user && (
           <>
             {user === "seller" ? (
@@ -57,18 +58,9 @@ const Navbar = () => {
             )}
           </>
         )}
-        <Link to="/signup">Sign Up</Link>
-        <Link to="/login">login</Link>
-        <Link to="/history">history</Link>
-        <Link to="/profile">
-          <img
-            src="https://i.postimg.cc/Sx363vKC/userimage.webp"
-            className="w-20 rounded-md"
-            alt=""
-          />
-        </Link>
       </nav>
     </div>
   );
 };
+
 export default Navbar;
