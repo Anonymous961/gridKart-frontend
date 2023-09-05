@@ -69,41 +69,43 @@ export default function History() {
   }
 
   return (
-    <div className="p-8">
-      <h1 className="text-2xl font-semibold mb-4">Transaction History</h1>
-      <table className="w-full border-collapse">
+    <div className="p-8 bg-gray-100">
+      <h1 className="text-3xl font-semibold mb-6 text-gray-800">
+        Transaction History
+      </h1>
+      <table className="w-full border-collapse bg-white">
         <thead>
-          <tr>
-            <th className="border p-2">Sl. No</th>
-            <th className="border p-2">From</th>
-            <th className="border p-2">To</th>
-            <th className="border p-2">Value</th>
-            <th className="border p-2">Timestamp</th>
-            <th className="border p-2">Token Symbol</th>
+          <tr className="bg-gray-200">
+            <th className="border p-3">Sl. No</th>
+            <th className="border p-3">From</th>
+            <th className="border p-3">To</th>
+            <th className="border p-3">Value</th>
+            <th className="border p-3">Timestamp</th>
+            <th className="border p-3">Token Symbol</th>
           </tr>
         </thead>
         <tbody>
           {transactions.map((transaction, index) => (
-            <tr key={index}>
-              <td className="border p-2">{index + 1}</td>
-              <td className="border p-2">
+            <tr key={index} className={index % 2 === 0 ? "bg-gray-100" : ""}>
+              <td className="border p-3">{index + 1}</td>
+              <td className="border p-3">
                 {transaction.from.slice(0, 6) +
                   "......" +
                   transaction.from.slice(-4)}
               </td>
-              <td className="border p-2">
+              <td className="border p-3">
                 {transaction.to.slice(0, 6) +
                   "......" +
                   transaction.to.slice(-4)}
               </td>
-              <td className="border p-2">{transaction.value}</td>
-              <td className="border p-2">
+              <td className="border p-3">{transaction.value}</td>
+              <td className="border p-3">
                 {new Date(
                   parseInt(transaction.timeStamp) * 1000
                 ).toLocaleString()}
               </td>
-              <td className="border p-2 flex">
-                <img src={coin} height="50px" width="50px" alt="Coins" />
+              <td className="border p-3 flex items-center">
+                <img src={coin} alt="Coins" className="h-8 w-8 mr-2" />
                 {transaction.tokenSymbol}
               </td>
             </tr>

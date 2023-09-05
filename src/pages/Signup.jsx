@@ -63,32 +63,34 @@ export default function Signup() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <div className="border-2 bg-lime-400 rounded-md flex flex-col justify-center items-center p-8 px-20 w-1/3">
-        <h1 className="mt-10 text-4xl text-white">Sign up</h1>
-        <form className="flex flex-col justify-center items-center pt-10 min-w-full">
+    <div className="flex justify-center items-center min-h-screen bg-gray-200">
+      <div className="border-2 bg-slate-600 shadow-md rounded-md p-8 w-1/3">
+        <h1 className="mb-6 text-3xl text-center font-semibold text-gray-50">
+          Sign Up
+        </h1>
+        <form className="flex flex-col" onSubmit={handleSignup}>
           <input
             type="text"
-            className="p-2 rounded-md m-1 w-3/4"
+            className="p-3 rounded-md mb-4 bg-gray-100 focus:outline-none focus:ring focus:border-green-500"
             placeholder="Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
           <input
-            className="p-2 rounded-md m-1 w-3/4"
+            className="p-3 rounded-md mb-4 bg-gray-100 focus:outline-none focus:ring focus:border-green-500"
             type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <input
-            className="p-2 rounded-md m-1 w-3/4"
+            className="p-3 rounded-md mb-4 bg-gray-100 focus:outline-none focus:ring focus:border-green-500"
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <label className="flex items-center m-1">
+          <label className="flex items-center m-1 text-gray-50">
             Are you a seller?
             <input
               type="checkbox"
@@ -99,13 +101,16 @@ export default function Signup() {
           </label>
           <button
             onClick={connectWallet}
-            className="m-3 bg-blue-400 p-3 rounded-md"
+            className={`m-3 bg-blue-400 p-3 rounded-md text-gray-50 ${
+              isWalletConnected && "cursor-not-allowed opacity-50"
+            }`}
+            disabled={isWalletConnected}
           >
             Connect MetaMask Wallet
           </button>
           <button
             onClick={handleSignup}
-            className={`m-3 bg-green-400 p-3 rounded-md ${
+            className={`m-3 bg-green-500 hover:bg-green-600 text-gray-50 py-2 rounded-md ${
               !isWalletConnected && "cursor-not-allowed opacity-50"
             }`}
             disabled={!isWalletConnected}
@@ -113,10 +118,13 @@ export default function Signup() {
             Sign Up
           </button>
         </form>
-        <p>
-          Already a user?
-          <Link to="/login" className="text-purple-500 underline">
-            Login
+        <p className="text-center text-gray-50">
+          Already a user?{" "}
+          <Link
+            to="/login"
+            className="text-gray-50 underline hover:text-emerald-600"
+          >
+            Login here
           </Link>
         </p>
       </div>
